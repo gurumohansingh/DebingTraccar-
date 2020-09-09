@@ -33,7 +33,9 @@ Ext.define('Traccar.view.edit.Devices', {
     stateful: true,
     stateId: 'devices-grid',
 
-    tbar: {
+    dockedItems: [{
+        xtype: 'toolbar',
+        dock: 'top',
         componentCls: 'toolbar-header-style',
         defaults: {
             xtype: 'button',
@@ -72,11 +74,24 @@ Ext.define('Traccar.view.edit.Devices', {
             reference: 'toolbarDeviceMenu',
             enableToggle: false
         }]
-    },
-
-    listeners: {
-        selectionchange: 'onSelectionChange'
-    },
+      },{
+        xtype: 'toolbar',
+        dock: 'top',
+        items: [{
+            xtype: 'textfield',
+            emptyText: Strings.deviceTitle,
+            width: '100%',
+            triggers: {
+                search: {
+                    handler: 'searchDevice',
+                    cls: 'fa-search'
+                }
+            },
+            listeners:{
+                change: 'onDeviceSearchChange'
+            }
+        }]
+    }],
 
     viewConfig: {
         enableTextSelection: true,
@@ -179,5 +194,17 @@ Ext.define('Traccar.view.edit.Devices', {
             dataIndex: 'lastUpdate',
             renderer: Traccar.AttributeFormatter.getFormatter('lastUpdate')
         }]
+    },
+    features: [{
+        ftype: 'grouping',
+        groupHeaderTpl: '{name}'
+    }],
+    selModel: {
+        selType: 'checkboxmodel',
+        flex: 0.5,
+        showHeaderCheckbox: false,
+        listeners:{
+            selectionchange: 'onSelectionChange'
+        }
     }
 });
