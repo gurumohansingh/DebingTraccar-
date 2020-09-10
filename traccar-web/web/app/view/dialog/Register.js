@@ -62,13 +62,13 @@ Ext.define('Traccar.view.dialog.Register', {
               items: [
                   {
                       fieldLabel  :Strings.sharedMph,
-                      name      : 'attributeSpeedUnit',
-                      inputValue: 1,
+                      name      : 'speedunit',
+                      inputValue: "mph",
                       labelWidth: 50
                   }, {
                       fieldLabel  :  Strings.sharedKmh,
-                      name      : 'attributeSpeedUnit',
-                      inputValue: 2,
+                      name      : 'speedunit',
+                      inputValue: "kmh",
                       labelWidth: 50,
                       margin:'0 0 0 10px',
                   }]
@@ -80,14 +80,14 @@ Ext.define('Traccar.view.dialog.Register', {
           items: [
               {
                   fieldLabel  :"*F",
-                  name      : 'temperatureUnit',
-                  inputValue: 1,
+                  name      : 'temperatureunit',
+                  inputValue: "F",
                   labelWidth: 50
               }, {
                   fieldLabel  :"*C",
-                  name      : 'temperatureUnit',
+                  name      : 'temperatureunit',
                    margin:'0 0 0 10px',
-                  inputValue: 2,
+                  inputValue: "C",
                   labelWidth: 50
               }]
       }]

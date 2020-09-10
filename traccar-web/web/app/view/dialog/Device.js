@@ -85,7 +85,29 @@ Ext.define('Traccar.view.dialog.Device', {
                         '<td>{name}</td></tr></table>';
                     }
                 }
-            }, {
+            },
+            /*{
+                xtype:'container',
+                layout:'hbox',
+                defaults:{
+                    margin:10
+                },
+                items:[{
+                    xtype:'component',
+                    html:'Custom Avatar:'
+                    },{
+                        xtype: 'image',
+                        src: 'images/animal.svg',
+                        width: 32,
+                        height: 32,
+                    },
+                    {
+                    xtype: 'button',
+                    glyph: 'xf055@FontAwesome',
+                    handler:'uploadAvatar'
+                }]
+            },*/
+             {
                 xtype: 'checkboxfield',
                 inputValue: true,
                 uncheckedValue: false,

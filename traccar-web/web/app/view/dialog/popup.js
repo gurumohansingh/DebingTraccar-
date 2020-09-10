@@ -1,6 +1,5 @@
 /*
- * Copyright 2017 Anton Tananaev (anton@traccar.org)
- * Copyright 2017 Andrey Kunitsyn (andrey@traccar.org)
+ * Copyright 2016 - 2017 Anton Tananaev (anton@traccar.org)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,18 +15,17 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-Ext.define('Traccar.view.dialog.DeviceController', {
-    extend: 'Traccar.view.dialog.BaseEditController',
-    alias: 'controller.device',
-
-    init: function () {
-        if (Traccar.app.getUser().get('administrator')) {
-            this.lookupReference('disabledField').setHidden(false);
-        }
+Ext.define('Traccar.view.dialog.popup', {
+    extend: 'Ext.Component',
+    xtype:'popup',
+    id:'overlayPopup',
+    padding: 5,
+    style: {
+        color: '#000000',
+        backgroundColor:'#FFFFFF',
+        border: 'lightblue',
+        'border-style': 'solid',
+        'border-radius': '15px'
     },
-    uploadAvatar:function(btn){
-        Ext.create('Traccar.view.dialog.CustomAvatar',{
-        }).show();
-    }
-
+    renderTo: Ext.getBody()
 });

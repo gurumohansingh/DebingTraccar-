@@ -272,5 +272,20 @@ public class User extends ExtendedModel {
     public boolean isPasswordValid(String password) {
         return Hashing.validatePassword(password, hashedPassword, salt);
     }
-
+    private String speedunit;
+    @QueryIgnore
+    public String getSpeedunit() {
+        return speedunit;
+    }
+    public void setSpeedunit(String speedunit) {
+        this.speedunit = speedunit;
+    }
+    private String temperatureUnit;
+    @QueryIgnore
+    public String getTemperatureUnit() {
+        return temperatureUnit;
+    }
+    public void setTemperatureUnit(String temperatureUnit) {
+        this.temperatureUnit = temperatureUnit;
+    }
 }
