@@ -273,19 +273,17 @@ public class User extends ExtendedModel {
         return Hashing.validatePassword(password, hashedPassword, salt);
     }
     private String speedunit;
-    @QueryIgnore
     public String getSpeedunit() {
         return speedunit;
     }
     public void setSpeedunit(String speedunit) {
         this.speedunit = speedunit;
     }
-    private String temperatureUnit;
-    @QueryIgnore
-    public String getTemperatureUnit() {
-        return temperatureUnit;
+    private String temperatureunit;
+    public String getTemperatureunit() {
+        return temperatureunit;
     }
-    public void setTemperatureUnit(String temperatureUnit) {
-        this.temperatureUnit = temperatureUnit;
+    public void setTemperatureunit(String temperatureunit) {
+        this.temperatureunit = temperatureunit;
     }
 }

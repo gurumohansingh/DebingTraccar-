@@ -220,7 +220,7 @@ Ext.define('Traccar.view.map.BaseMap', {
                 }
             });
             if(features.length>0){
-                Ext.ComponentQuery.query("#baseMapView")[0].updatePopup(45)
+                Ext.ComponentQuery.query("#baseMapView")[0].updatePopup(features)
                 this.getOverlayById("popup").setPosition(e.coordinate);
             }
             else{

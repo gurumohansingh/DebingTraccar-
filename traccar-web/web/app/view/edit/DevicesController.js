@@ -112,9 +112,22 @@ Ext.define('Traccar.view.edit.DevicesController', {
 
     onSelectionChange: function (el, records) {
         if (records && records.length) {
-            this.updateButtons(records);
-            this.fireEvent('selectdevice', records[0], true);
+            if(records.length > 1){
+                this.disableButtons();
+            }else if(records.length === 1){
+                this.updateButtons(records);
+            }
+            for(var i = 0; i < records.length; i++){
+                this.fireEvent('selectdevice', records[i], true);
+            }
         }
+    },
+
+    disableButtons: function(){
+        this.lookupReference('toolbarEditButton').setDisabled(true);
+        this.lookupReference('toolbarRemoveButton').setDisabled(true);
+        this.lookupReference('toolbarDeviceMenu').setDisabled(true);
+        this.lookupReference('deviceCommandButton').setDisabled(true);
     },
 
     selectDevice: function (device) {
@@ -135,5 +148,18 @@ Ext.define('Traccar.view.edit.DevicesController', {
 
     deselectFeature: function () {
         this.getView().getSelectionModel().deselectAll();
+    },
+
+    searchDevice: function(field, trigger, e) {
+        var searchTxt = field.getValue();
+        if(searchTxt){
+            this.getView().getStore().filter('name', searchTxt);
+        }
+    },
+
+    onDeviceSearchChange: function(field, newVal){
+        if(!newVal){
+            this.getView().getStore().clearFilter();
+        }
     }
 });

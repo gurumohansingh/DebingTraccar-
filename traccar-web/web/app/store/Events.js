@@ -19,7 +19,7 @@
 Ext.define('Traccar.store.Events', {
     extend: 'Ext.data.Store',
     model: 'Traccar.model.Event',
-
+    storeId:'Events',
     trackRemoved: false,
 
     proxy: {
