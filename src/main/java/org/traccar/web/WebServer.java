@@ -165,7 +165,8 @@ public class WebServer {
         ResourceConfig resourceConfig = new ResourceConfig();
         resourceConfig.registerClasses(
                 JacksonFeature.class, ObjectMapperProvider.class, ResourceErrorHandler.class,
-                SecurityRequestFilter.class, CorsResponseFilter.class, DateParameterConverterProvider.class, MultiPartFeature.class);
+                SecurityRequestFilter.class, CorsResponseFilter.class,
+                DateParameterConverterProvider.class, MultiPartFeature.class);
         resourceConfig.packages(ServerResource.class.getPackage().getName());
         servletHandler.addServlet(new ServletHolder(new ServletContainer(resourceConfig)), "/api/*");
     }
