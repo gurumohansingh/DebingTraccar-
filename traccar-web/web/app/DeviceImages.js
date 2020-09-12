@@ -23,6 +23,9 @@ Ext.define('Traccar.DeviceImages', {
         var i, info, svg, width, height, rotateTransform, scaleTransform, fill;
 
         info = Ext.getStore('DeviceImages').findRecord('key', category || 'default', 0, false, false, true);
+         if(Ext.isEmpty(info)){
+           info= this.addSvgFile(category,'images/' + category + '.svg', category + 'Svg');
+        }
         svg = Ext.clone(info.get('svg'));
         if (!svg) {
             svg = this.cloneDocument(info.get('svg'));
@@ -95,5 +98,24 @@ Ext.define('Traccar.DeviceImages', {
         image.category = category;
 
         return image;
+    },
+    addSvgFile:function(key,file, id) {
+        var store= Ext.getStore('DeviceImages');
+        var svg = document.createElement('object');
+        svg.setAttribute('id', id);
+        svg.setAttribute('data', file);
+        svg.setAttribute('type', 'image/svg+xml');
+        svg.setAttribute('style', 'visibility:hidden;position:absolute;left:-100px;');
+        document.body.appendChild(svg);
+        var data={
+            key: key,
+            name: 'category' + key.charAt(0).toUpperCase() + key.slice(1),
+            svg: document.getElementById(key + 'Svg').contentDocument,
+            fillId: key === 'arrow' ? 'arrow' : 'background',
+            rotateId: key === 'arrow' ? 'arrow' : 'background',
+            scaleId: key === 'arrow' ? 'arrow' : 'layer1'
+        };
+        store.add(data);
+        return  store.findRecord('key', key || 'default', 0, false, false, true);
     }
 });

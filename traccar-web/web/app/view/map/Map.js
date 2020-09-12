@@ -106,7 +106,41 @@ Ext.define('Traccar.view.map.Map', {
     getLiveRouteLayer: function () {
         return this.liveRouteLayer;
     },
-
+    updatePopup: function (data) {
+    setTimeout(function(){
+        var attributes=Ext.getStore('Attributes');
+        var device=data[0].get("record");
+        var  Status=device.get('status'),
+             Mileage=attributes.findRecord('attribute','totalDistance')?attributes.findRecord('attribute','totalDistance').get('value'):"NA",
+             Time=attributes.findRecord('name','Time')?attributes.findRecord('name','Time').get('value'):"NA",
+             Address=attributes.findRecord('name','address')?attributes.findRecord('name','address').get('value'):"NA",
+             Power="On",
+             Engin="On",
+             Temp0='25.6C',
+             Fuel=attributes.findRecord('name','fuel')?attributes.findRecord('name','fuel').get('value'):"NA",
+             Ac='On'
+        document.getElementById("overlayPopup").innerHTML=`
+        <dev>
+           <div>Status:${Status} </div>
+           <div>Mileage:${Mileage} </div>
+           <div>Time:${Time} </div>
+           <div>Address:${Address} </div>
+           <hr>
+           <div>
+           <img src="images/1.gif" alt="power" width="16" height="16">
+                ${Power}
+                <img src="images/2.gif" alt="Engine" width="16" height="16">
+                ${Engin}
+                <img src="images/3.png" alt="Temp" width="16" height="16">
+                ${Temp0}
+                <img src="images/4.png" alt="Fuel" width="16" height="16">
+                ${Fuel}
+                <img src="images/5.png" alt="Ac" width="16" height="16">
+                ${Ac}
+            </div>
+        </dev>`;
+        },300)
+     },
     initMap: function () {
         this.callParent();
 
@@ -138,5 +172,12 @@ Ext.define('Traccar.view.map.Map', {
         this.map.addLayer(new ol.layer.Vector({
             source: this.markersSource
         }));
+
+        this.popup = new ol.Overlay({
+            element: document.getElementById("overlayPopup"),
+            id:'popup'
+        });
+        this.popup.setOffset([0, 30]);
+        this.map.addOverlay(this.popup);
     }
 });

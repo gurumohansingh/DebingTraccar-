@@ -18,7 +18,7 @@
 Ext.define('Traccar.view.map.BaseMap', {
     extend: 'Ext.panel.Panel',
     xtype: 'baseMapView',
-
+    itemId:'baseMapView',
     layout: 'fit',
 
     getMap: function () {
@@ -219,7 +219,15 @@ Ext.define('Traccar.view.map.BaseMap', {
                     return !layer.get('name');
                 }
             });
+            if(features.length>0){
+                Ext.ComponentQuery.query("#baseMapView")[0].updatePopup(features)
+                this.getOverlayById("popup").setPosition(e.coordinate);
+            }
+            else{
+                this.getOverlayById("popup").setPosition(undefined);
+            }
             if (features) {
+
                 for (i = 0; i < features.length; i++) {
                     self.fireEvent('selectfeature', features[i]);
                 }

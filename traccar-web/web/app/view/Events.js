@@ -94,24 +94,25 @@ Ext.define('Traccar.view.Events', {
     listeners: {
         selectionchange: 'onSelectionChange'
     },
-
+    forceFit:true,
     columns: {
-        defaults: {
-            flex: 1,
-            minWidth: Traccar.Style.columnWidthNormal
-        },
         items: [{
-            text: Strings.sharedDevice,
+        width:35,
+         renderer: function () {
+                        return '<img src="images/notificationEvent.png" />';
+                      }
+        },{
             dataIndex: 'deviceId',
-            renderer: Traccar.AttributeFormatter.getFormatter('deviceId')
-        }, {
-            flex: 2,
-            text: Strings.positionEvent,
-            dataIndex: 'text'
-        }, {
-            text: Strings.positionFixTime,
-            dataIndex: 'serverTime',
-            renderer: Traccar.AttributeFormatter.getFormatter('lastUpdate')
+            flex:1,
+            renderer: function (value, metaData, record, rowIndex, colIndex, store, view) {
+               var device= Traccar.AttributeFormatter.deviceIdFormatter(value);
+               var textTime=record.get('text');
+               if(!Ext.isEmpty(record.get('serverTime'))){
+                   textTime= `${textTime} at ${Ext.util.Format.date(record.get('serverTime'),"yy-m-d h:m:s")}`;
+               }
+               var final =textTime+"<br/>Device: "+device ;
+               return  '<div style="white-space:normal !important;">'+ final +'</div>';
+            }
         }]
     }
 });

@@ -7,11 +7,11 @@ import httplib
 import time
 import random
 
-id = '123456789012345'
+id = '236842'
 server = 'localhost:5055'
 period = 1
 step = 0.001
-device_speed = 40
+device_speed = 400
 driver_id = '123456'
 
 waypoints = [

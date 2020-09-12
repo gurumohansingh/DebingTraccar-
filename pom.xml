@@ -243,7 +243,11 @@
             <artifactId>jakarta.activation-api</artifactId>
             <version>1.2.2</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <version>3.0.0-M6</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -388,7 +392,7 @@
             </build>
         </profile>
     </profiles>
-    
+
     <reporting>
         <plugins>
             <plugin>

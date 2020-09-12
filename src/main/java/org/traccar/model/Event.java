@@ -62,6 +62,11 @@ public class Event extends Message {
 
     public static final String TYPE_DRIVER_CHANGED = "driverChanged";
 
+    public static final String TYPE_REEFER_FAULT = "ReeferFault";
+    public static final String TYPE_REEFER_RUNNING = "ReeferRunning";
+    public static final String TYPE_REEFER_POWER_ON = "ReeferPowerOn";
+    public static final String TYPE_REEFER_POWER_OFF = "ReeferPowerOff";
+
     private Date serverTime;
 
     public Date getServerTime() {
