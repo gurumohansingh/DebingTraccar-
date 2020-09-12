@@ -22,16 +22,16 @@ Ext.define('Traccar.view.Events', {
     requires: [
         'Traccar.view.EventsController'
     ],
-
+    floating: true,
+    draggable :true,
     controller: 'events',
-
+    minHeight:Traccar.Style.windowHeight,
     store: 'Events',
-    hidden:true,
     stateful: true,
     stateId: 'events-grid',
-
+    constrain:true,
     title: Strings.reportEvents,
-
+    maxHeight:Traccar.Style.windowHeight,
     sortableColumns: false,
 
     header: false,

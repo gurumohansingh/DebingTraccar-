@@ -26,7 +26,7 @@ Ext.define('Traccar.view.map.Map', {
 
     controller: 'map',
 
-    title: Strings.mapTitle,
+   // title: Strings.mapTitle,
     tbar: {
         componentCls: 'toolbar-header-style',
         defaults: {
@@ -45,6 +45,20 @@ Ext.define('Traccar.view.map.Map', {
         }, {
             xtype: 'tbfill'
         }, {
+            handler: 'showEventsWindow',
+            reference: 'showEventsWindow',           
+            icon:'images/pop-up.png',
+            stateful: false,
+            pressed: false,            
+            tooltip: Strings.reportEvents
+        },{
+            handler: 'showStateWindow',
+            reference: 'showStateWindow',           
+            icon:'images/rubik.png',
+            stateful: false,
+            pressed: false,            
+            tooltip: Strings.stateTitle
+        },{
             handler: 'showReports',
             reference: 'showReportsButton',
             glyph: 'xf0f6@FontAwesome',
