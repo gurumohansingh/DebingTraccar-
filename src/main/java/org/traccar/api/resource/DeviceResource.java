@@ -16,6 +16,8 @@
 package org.traccar.api.resource;
 
 
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.traccar.Context;
 import org.traccar.api.BaseObjectResource;
 import org.traccar.database.DeviceManager;
@@ -23,14 +25,13 @@ import org.traccar.helper.LogAction;
 import org.traccar.model.Device;
 import org.traccar.model.DeviceAccumulators;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashSet;
@@ -95,13 +96,14 @@ public class DeviceResource extends BaseObjectResource<Device> {
         LogAction.resetDeviceAccumulators(getUserId(), entity.getDeviceId());
         return Response.noContent().build();
     }
-   /* @POST
+
+   @POST
     @Path("/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response uploadFile(
             @FormDataParam("file") InputStream uploadedInputStream,
             @FormDataParam("file") FormDataContentDisposition fileDetail) {
-        String fileLocation = "e://" + fileDetail.getFileName();
+        String fileLocation = "d:/temp/";
         //saving file
         try {
             FileOutputStream out = new FileOutputStream(new File(fileLocation));
@@ -116,5 +118,5 @@ public class DeviceResource extends BaseObjectResource<Device> {
         } catch (IOException e) {e.printStackTrace();}
         String output = "File successfully uploaded to : " + fileLocation;
         return Response.status(200).entity(output).build();
-    }*/
+    }
 }
