@@ -123,13 +123,6 @@ Ext.define('Traccar.view.edit.DevicesController', {
         visibleStore.loadRecords(records, true ) ;       
     },
 
-    disableButtons: function(){
-        this.lookupReference('toolbarEditButton').setDisabled(true);
-        this.lookupReference('toolbarRemoveButton').setDisabled(true);
-        this.lookupReference('toolbarDeviceMenu').setDisabled(true);
-        this.lookupReference('deviceCommandButton').setDisabled(true);
-    },
-
     selectDevice: function (device) {
         this.getView().getSelectionModel().select([device], false, true);
         this.updateButtons(this.getView().getSelectionModel().getSelected().items);
@@ -160,6 +153,27 @@ Ext.define('Traccar.view.edit.DevicesController', {
     onDeviceSearchChange: function(field, newVal){
         if(!newVal){
             this.getView().getStore().clearFilter();
+        }
+    },
+
+    onDeviceSelect: function(selModel, record){
+        var overview = Ext.ComponentQuery.query('#devicesOverview'),
+        panel;
+        if(overview.length > 0){
+            panel = overview[0];
+        }else{
+            panel = Ext.create('Traccar.view.deviceOverview.DevicesView',{
+                itemId: 'devicesOverview'
+            });
+            panel.show().alignTo(Ext.getBody(), 'tr-tr');
+        }
+        panel.fireEvent('addDevice', record);
+    },
+
+    onDeviceDeselect: function(selModel, record){
+        var overview = Ext.ComponentQuery.query('#devicesOverview');
+        if(overview.length > 0){
+            overview[0].fireEvent('removeDevice', record);
         }
     }
 });

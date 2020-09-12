@@ -109,14 +109,18 @@ public class DeviceResource extends BaseObjectResource<Device> {
     public Response uploadFile(
             @FormDataParam("file") InputStream uploadedInputStream,
             @FormDataParam("file") FormDataContentDisposition fileDetail) {
-        String fileLocation = System.getProperty("user.dir") + "\\traccar-web\\web\\images\\";
+        String fileLocation = System.getProperty("user.dir") + "\\traccar-web\\web\\avatars\\";
         //saving file
         try {
+            File directory = new File(fileLocation);
+            if (! directory.exists()){
+                directory.mkdir();
+            }
             FileOutputStream out = new FileOutputStream(new File(fileLocation + fileDetail.getFileName()));
             int read = 0;
             byte[] bytes = new byte[1024];
             out = new FileOutputStream(new File(fileLocation));
-            while ((read = uploadedInputStream.read(bytes)) != -1) {
+            while ((read += uploadedInputStream.read(bytes)) != -1) {
                 out.write(bytes, 0, read);
             }
             out.flush();
