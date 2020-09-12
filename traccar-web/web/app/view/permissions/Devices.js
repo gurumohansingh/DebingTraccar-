@@ -15,196 +15,68 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-Ext.define('Traccar.view.edit.Devices', {
-    extend: 'Traccar.view.GridPanel',
-    xtype: 'devicesView',
+Ext.define('Traccar.view.permissions.Devices', {
+    extend: 'Traccar.view.permissions.Base',
+    xtype: 'linkDevicesView',
 
     requires: [
-        'Traccar.AttributeFormatter',
-        'Traccar.view.edit.DevicesController',
-        'Traccar.view.ArrayListFilter',
-        'Traccar.view.DeviceMenu'
+        'Traccar.AttributeFormatter'
     ],
 
-    controller: 'devices',
-
-    store: 'VisibleDevices',
-
-    stateful: true,
-    stateId: 'devices-grid',
-
-    dockedItems: [{
-        xtype: 'toolbar',
-        dock: 'top',
-        componentCls: 'toolbar-header-style',
-        defaults: {
-            xtype: 'button',
-            disabled: true,
-            tooltipType: 'title'
-        },
-        items: [{
-            xtype: 'tbtext',
-            html: Strings.deviceTitle,
-            baseCls: 'x-panel-header-title-default'
-        }, {
-            xtype: 'tbfill',
-            disabled: false
-        }, {
-            handler: 'onAddClick',
-            reference: 'toolbarAddButton',
-            glyph: 'xf067@FontAwesome',
-            tooltip: Strings.sharedAdd
-        }, {
-            handler: 'onEditClick',
-            reference: 'toolbarEditButton',
-            glyph: 'xf040@FontAwesome',
-            tooltip: Strings.sharedEdit
-        }, {
-            handler: 'onRemoveClick',
-            reference: 'toolbarRemoveButton',
-            glyph: 'xf00d@FontAwesome',
-            tooltip: Strings.sharedRemove
-        }, {
-            handler: 'onCommandClick',
-            reference: 'deviceCommandButton',
-            glyph: 'xf093@FontAwesome',
-            tooltip: Strings.deviceCommand
-        }, {
-            xtype: 'deviceMenu',
-            reference: 'toolbarDeviceMenu',
-            enableToggle: false
-        }]
-      },{
-        xtype: 'toolbar',
-        dock: 'top',
-        items: [{
-            xtype: 'textfield',
-            emptyText: Strings.deviceTitle,
-            width: '100%',
-            triggers: {
-                search: {
-                    handler: 'searchDevice',
-                    cls: 'fa-search'
-                }
-            },
-            listeners:{
-                change: 'onDeviceSearchChange'
-            }
-        }]
-    }],
-
-    viewConfig: {
-        enableTextSelection: true,
-        getRowClass: function (record) {
-            var result = '', status = record.get('status');
-            if (record.get('disabled')) {
-                result = 'view-item-disabled ';
-            }
-            if (status) {
-                result += Ext.getStore('DeviceStatuses').getById(status).get('color');
-            }
-            return result;
-        }
-    },
-
     columns: {
-        defaults: {
-            flex: 1,
-            minWidth: Traccar.Style.columnWidthNormal
-        },
         items: [{
             text: Strings.sharedName,
             dataIndex: 'name',
+            flex: 1,
+            minWidth: Traccar.Style.columnWidthNormal,
             filter: 'string'
         }, {
             text: Strings.deviceIdentifier,
             dataIndex: 'uniqueId',
-            hidden: true,
+            flex: 1,
+            minWidth: Traccar.Style.columnWidthNormal,
             filter: 'string'
         }, {
             text: Strings.sharedPhone,
             dataIndex: 'phone',
-            hidden: true
+            flex: 1,
+            minWidth: Traccar.Style.columnWidthNormal,
+            hidden: true,
+            filter: 'string'
         }, {
             text: Strings.deviceModel,
             dataIndex: 'model',
-            hidden: true
+            flex: 1,
+            minWidth: Traccar.Style.columnWidthNormal,
+            hidden: true,
+            filter: 'string'
         }, {
             text: Strings.deviceContact,
             dataIndex: 'contact',
-            hidden: true
-        }, {
-            text: Strings.groupDialog,
-            dataIndex: 'groupId',
+            flex: 1,
+            minWidth: Traccar.Style.columnWidthNormal,
             hidden: true,
-            filter: {
-                type: 'list',
-                labelField: 'name',
-                store: 'Groups'
-            },
-            renderer: Traccar.AttributeFormatter.getFormatter('groupId')
+            filter: 'string'
         }, {
             text: Strings.sharedDisabled,
             dataIndex: 'disabled',
+            flex: 1,
+            minWidth: Traccar.Style.columnWidthNormal,
             renderer: Traccar.AttributeFormatter.getFormatter('disabled'),
             hidden: true,
             filter: 'boolean'
         }, {
-            text: Strings.sharedGeofences,
-            dataIndex: 'geofenceIds',
+            text: Strings.groupDialog,
+            dataIndex: 'groupId',
+            flex: 1,
+            minWidth: Traccar.Style.columnWidthNormal,
             hidden: true,
-            filter: {
-                type: 'arraylist',
-                idField: 'id',
-                labelField: 'name',
-                store: 'Geofences'
-            },
-            renderer: function (value) {
-                var i, name, result = '';
-                if (Ext.isArray(value)) {
-                    for (i = 0; i < value.length; i++) {
-                        name = Traccar.AttributeFormatter.geofenceIdFormatter(value[i]);
-                        if (name) {
-                            result += name + (i < value.length - 1 ? ', ' : '');
-                        }
-                    }
-                }
-                return result;
-            }
-        }, {
-            text: Strings.deviceStatus,
-            dataIndex: 'status',
             filter: {
                 type: 'list',
                 labelField: 'name',
-                store: 'DeviceStatuses'
+                store: 'AllGroups'
             },
-            renderer: function (value) {
-                var status;
-                if (value) {
-                    status = Ext.getStore('DeviceStatuses').getById(value);
-                    if (status) {
-                        return status.get('name');
-                    }
-                }
-                return null;
-            }
-        }, {
-            text: Strings.deviceLastUpdate,
-            dataIndex: 'lastUpdate',
-            renderer: Traccar.AttributeFormatter.getFormatter('lastUpdate')
+            renderer: Traccar.AttributeFormatter.getFormatter('groupId')
         }]
-    },
-    features: [{
-        ftype: 'grouping',
-        groupHeaderTpl: '{name}'
-    }],
-    selModel: {
-        selType: 'checkboxmodel',
-        flex: 0.5,
-        showHeaderCheckbox: false,
-        listeners:{
-            selectionchange: 'onSelectionChange'
-        }
     }
 });

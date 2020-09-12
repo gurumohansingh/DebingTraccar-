@@ -28,6 +28,9 @@ Ext.define('Traccar.view.dialog.DeviceController', {
     uploadAvatar:function(btn){
         Ext.create('Traccar.view.dialog.CustomAvatar',{
         }).show();
+    },
+    showCustomAvatra(){
+        this.lookupReference('customAvatar').setSrc("images/animal.svg");
     }
 
 });

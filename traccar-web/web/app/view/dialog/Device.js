@@ -86,7 +86,7 @@ Ext.define('Traccar.view.dialog.Device', {
                     }
                 }
             },
-            /*{
+            {
                 xtype:'container',
                 layout:'hbox',
                 defaults:{
@@ -97,16 +97,22 @@ Ext.define('Traccar.view.dialog.Device', {
                     html:'Custom Avatar:'
                     },{
                         xtype: 'image',
-                        src: 'images/animal.svg',
+                        reference:'customAvatar',
+                        src: '',
                         width: 32,
                         height: 32,
+                        listeners:{
+                        render:function (img, eOpts) {
+                            img.setSrc("/images/"+img.up("form").getRecord().get('category')+".svg")
+                        }
+                        }
                     },
                     {
                     xtype: 'button',
                     glyph: 'xf055@FontAwesome',
                     handler:'uploadAvatar'
                 }]
-            },*/
+            },
              {
                 xtype: 'checkboxfield',
                 inputValue: true,

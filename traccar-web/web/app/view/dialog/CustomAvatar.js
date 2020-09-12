@@ -19,6 +19,9 @@
 Ext.define('Traccar.view.dialog.CustomAvatar', {
     extend: 'Traccar.view.dialog.Base',
     title: 'Upload SVG only',
+     requires: [
+            'Traccar.view.dialog.CustomAvatarController'
+        ],
     controller: 'CustomAvatarController',
     items: {
         xtype: 'form',
