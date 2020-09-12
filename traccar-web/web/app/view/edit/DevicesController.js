@@ -110,17 +110,17 @@ Ext.define('Traccar.view.edit.DevicesController', {
         this.lookupReference('deviceCommandButton').setDisabled(empty || readonly);
     },
 
-    onSelectionChange: function (el, records) {
-        if (records && records.length) {
-            if(records.length > 1){
-                this.disableButtons();
-            }else if(records.length === 1){
-                this.updateButtons(records);
-            }
-            for(var i = 0; i < records.length; i++){
-                this.fireEvent('selectdevice', records[i], true);
-            }
+    onItemclick: function (el, record,item, index, e, eOpts ) {
+        if (record) {
+            this.updateButtons(record);
+            this.fireEvent('selectdevice', record, true);
+            this.updatingRecord=record;
         }
+    },
+
+    onSelectionChange: function (el, records) {
+        var visibleStore=Ext.getStore('VisibleDevices');
+        visibleStore.loadRecords(records, true ) ;       
     },
 
     disableButtons: function(){

@@ -28,7 +28,7 @@ Ext.define('Traccar.view.edit.Devices', {
 
     controller: 'devices',
 
-    store: 'VisibleDevices',
+    store: 'Devices',
 
     stateful: true,
     stateId: 'devices-grid',
@@ -92,7 +92,9 @@ Ext.define('Traccar.view.edit.Devices', {
             }
         }]
     }],
-
+    listeners: {
+        itemclick : 'onItemclick'
+    },
     viewConfig: {
         enableTextSelection: true,
         getRowClass: function (record) {
@@ -197,11 +199,12 @@ Ext.define('Traccar.view.edit.Devices', {
     },
     features: [{
         ftype: 'grouping',
-        groupHeaderTpl: '{name}'
+        groupHeaderTpl: 'Group:{name}'
     }],
     selModel: {
         selType: 'checkboxmodel',
         flex: 0.5,
+        checkOnly:true,
         showHeaderCheckbox: false,
         listeners:{
             selectionchange: 'onSelectionChange'

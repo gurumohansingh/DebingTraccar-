@@ -31,14 +31,14 @@ Ext.define('Traccar.view.edit.ToolbarController', {
     },
 
     onEditClick: function () {
-        var dialog, objectInstance = this.getView().getSelectionModel().getSelection()[0];
+        var dialog, objectInstance = this.updatingRecord;
         dialog = Ext.create(this.objectDialog);
         dialog.down('form').loadRecord(objectInstance);
         dialog.show();
     },
 
     onRemoveClick: function () {
-        var objectInstance = this.getView().getSelectionModel().getSelection()[0];
+        var objectInstance = this.updatingRecord;
         Ext.Msg.show({
             title: this.removeTitle,
             message: Strings.sharedRemoveConfirm,

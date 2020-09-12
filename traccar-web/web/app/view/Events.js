@@ -18,8 +18,7 @@
 
 Ext.define('Traccar.view.Events', {
     extend: 'Traccar.view.GridPanel',
-    xtype: 'eventsView',
-
+    xtype: 'eventsView',    
     requires: [
         'Traccar.view.EventsController'
     ],
@@ -27,7 +26,7 @@ Ext.define('Traccar.view.Events', {
     controller: 'events',
 
     store: 'Events',
-
+    hidden:true,
     stateful: true,
     stateId: 'events-grid',
 

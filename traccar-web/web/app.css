@@ -15,7 +15,9 @@
 .toolbar-header-style {
     background-color: #5fa2dd !important;
 }
-
+.map-toolbar-header-style {
+  background:transparent !important;
+}
 body.x-border-layout-ct, div.x-border-layout-ct {
     background-color: #bbbbbb !important;
 }

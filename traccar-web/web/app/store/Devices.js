@@ -18,7 +18,7 @@
 Ext.define('Traccar.store.Devices', {
     extend: 'Ext.data.Store',
     model: 'Traccar.model.Device',
-
+    groupField:'groupId',
     proxy: {
         type: 'rest',
         url: 'api/devices',
