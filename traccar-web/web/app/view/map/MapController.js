@@ -46,8 +46,8 @@ Ext.define('Traccar.view.map.MapController', {
         this.callParent();
         this.lookupReference('showReportsButton').setVisible(
             Traccar.app.isMobile() && !Traccar.app.getBooleanAttributePreference('ui.disableReport'));
-        this.lookupReference('showEventsButton').setVisible(
-            Traccar.app.isMobile() && !Traccar.app.getBooleanAttributePreference('ui.disableEvents'));
+        this.lookupReference('showEventsButton').setVisible(Traccar.app.isMobile() && !Traccar.app.getBooleanAttributePreference('ui.disableEvents'));  
+        this.eventWindow=Ext.create('Traccar.view.Events');      
     },
 
     showReports: function () {
@@ -93,5 +93,24 @@ Ext.define('Traccar.view.map.MapController', {
 
     zoomToAllDevices: function () {
         this.zoomToAllPositions(Ext.getStore('LatestPositions').getData().items);
+    },
+    showEventsWindow:function(btn){
+        if(btn.pressed){
+            this.eventWindow.showAt(btn.getX(),btn.getY()+50);
+        }
+        else{
+            this.eventWindow.hide();
+        }
+        
+    },
+    showStateWindow:function(btn){
+        var stateView=Ext.ComponentQuery.query('stateView')[0];
+        if(btn.pressed){
+            stateView.setHidden(false);
+        }
+        else{
+            stateView.setHidden(true);
+        }
+        
     }
 });

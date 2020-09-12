@@ -72,13 +72,5 @@ Ext.define('Traccar.view.Main', {
         region: 'center',
         xtype: 'mapView',
         collapsible: false
-    }, {
-        region: 'east',
-        xtype: 'eventsView',
-        reference: 'eventsView',
-        width: Traccar.Style.deviceWidth,
-        collapsed: true,
-        titleCollapse: true,
-        floatable: false
     }]
 });
