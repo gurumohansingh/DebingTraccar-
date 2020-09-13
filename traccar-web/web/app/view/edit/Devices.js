@@ -23,7 +23,8 @@ Ext.define('Traccar.view.edit.Devices', {
         'Traccar.AttributeFormatter',
         'Traccar.view.edit.DevicesController',
         'Traccar.view.ArrayListFilter',
-        'Traccar.view.DeviceMenu'
+        'Traccar.view.DeviceMenu',
+        'Traccar.view.deviceOverview.DeviceStateStore'
     ],
 
     controller: 'devices',

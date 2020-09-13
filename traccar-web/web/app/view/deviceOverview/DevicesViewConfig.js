@@ -19,34 +19,136 @@
 Ext.define('Traccar.view.deviceOverview.DevicesViewConfig', {
     extend: 'Traccar.view.dialog.Base',
     title: 'Select any five',
+    controller: 'deviceViewConfig',
     items: {
         xtype: 'form',
         reference:'form',
-        defaultType: 'checkboxfield',
+        listeners:{
+            render: 'onConfigFormRender'
+        },
         defaults:{
-            width:100,
-            height:100
+            xtype: 'container',
+            width: 100,
+            height: 100,
+            layout: 'hbox'
         },
         layout: {
             type: 'table',
             columns: 4
         },
         items: [{
-            name:'type1'
+            items:[{
+                xtype: 'checkbox',
+                itemId: 'speedCheck',
+                listeners:{
+                    change: 'onPrefChange'
+                }
+            },{
+                xtype: 'image',
+                src: './images/speed.svg',
+                height: 40,
+                width: 40,
+                margin: 10
+
+            }]
         },{
-            name:'type2'
+            items:[{
+                xtype: 'checkbox',
+                itemId: 'batteryCheck',
+                listeners:{
+                    change: 'onPrefChange'
+                }
+            },{
+                xtype: 'image',
+                src: './images/1.gif',
+                height: 40,
+                width: 40,
+                margin: 10
+            }]
         },{
-            name:'type3'
+            items:[{
+                xtype: 'checkbox',
+                itemId: 'ignitionCheck',
+                listeners:{
+                    change: 'onPrefChange'
+                }
+            },{
+                xtype: 'image',
+                src: './images/2.gif',
+                height: 40,
+                width: 40,
+                margin: 10
+            }]
         },{
-            name:'type4'
+            items:[{
+                xtype: 'checkbox',
+                itemId: 'tempCheck',
+                listeners:{
+                    change: 'onPrefChange'
+                }
+            },{
+                xtype: 'image',
+                src: './images/3.png',
+                height: 40,
+                width: 40,
+                margin: 10
+            }]
         },{
-            name:'type5'
+            items:[{
+                xtype: 'checkbox',
+                itemId: 'airConditionerCheck',
+                listeners:{
+                    change: 'onPrefChange'
+                }
+            },{
+                xtype: 'image',
+                src: './images/5.png',
+                height: 40,
+                width: 40,
+                margin: 10
+            }]
         },{
-            name:'type6'
+            items:[{
+                xtype: 'checkbox',
+                itemId: 'fuelCheck',
+                listeners:{
+                    change: 'onPrefChange'
+                }
+            },{
+                xtype: 'image',
+                src: './images/4.png',
+                height: 40,
+                width: 40,
+                margin: 10
+            }]
         },{
-            name:'type7'
+            items:[{
+                xtype: 'checkbox',
+                itemId: 'coolantTempCheck',
+                listeners:{
+                    change: 'onPrefChange'
+                }
+            },{
+                xtype: 'image',
+                src: './images/hot-water.svg',
+                height: 40,
+                width: 40,
+                margin: 10
+            }]
         },{
-            name:'type7'
+            items:[{
+                xtype: 'checkbox',
+                itemId: 'rpmCheck',
+                listeners:{
+                    change: 'onPrefChange'
+                }
+            },{
+                xtype: 'image',
+                src: './images/1111.svg',
+                height: 40,
+                width: 40,
+                margin: 10
+            }]
         }],
         buttons: [{
             glyph: 'xf00c@FontAwesome',

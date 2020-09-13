@@ -8,9 +8,13 @@ Ext.define('Traccar.view.deviceOverview.OverviewController', {
     },
 
     onAddDevice: function(record){
-        //ToDo: Implement Ajax to get device details
-        var deviceIcons={type1:"",type2:"",type3:"",type4:"",type5:"",type6:"hidden",type7:"hidden",type8:"hidden"};
-        record.set(deviceIcons);
+        var stateStore = Ext.data.StoreManager.lookup('deviceStateStore');
+        var stateRecord = stateStore.getAt(stateStore.findExact('deviceId', record.get('id')));
+        if(stateRecord){
+            record.set('state', stateRecord.getData());
+        }
+        var activeIcons = {speed:"", battery:"", ignition:"", temp:"", airConditioner:"", fuel:"hidden", coolantTemp:"hidden", rpm:"hidden"};
+        record.set(activeIcons);
         this.getView().down('dataview').getStore().add(record);
     },
 
@@ -18,8 +22,8 @@ Ext.define('Traccar.view.deviceOverview.OverviewController', {
         //ToDo: Implement Ajax to get device details
         this.getView().down('dataview').getStore().remove(record);
     },
-    configView:function( view, record, item, index, e, eOpts ) {
-       var newConfigWin=Ext.create('Traccar.view.deviceOverview.DevicesViewConfig');
+    onStateItemClick: function( view, record, item, index, e, eOpts ) {
+       var newConfigWin = Ext.create('Traccar.view.deviceOverview.DevicesViewConfig');
        newConfigWin.down('form').loadRecord (record);
        newConfigWin.show();
     }

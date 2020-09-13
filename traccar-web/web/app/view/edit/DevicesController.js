@@ -68,6 +68,8 @@ Ext.define('Traccar.view.edit.DevicesController', {
         setInterval(function () {
             self.getView().getView().refresh();
         }, Traccar.Style.refreshPeriod);
+
+        Ext.create('Traccar.view.deviceOverview.DeviceStateStore').load();
     },
 
     onCommandClick: function () {
@@ -162,8 +164,11 @@ Ext.define('Traccar.view.edit.DevicesController', {
         if(overview.length > 0){
             panel = overview[0];
         }else{
+            var tbar = Ext.ComponentQuery.query('#mapTopToolbar')[0];
+            var map = tbar.up('mapView');
             panel = Ext.create('Traccar.view.deviceOverview.DevicesView',{
-                itemId: 'devicesOverview'
+                itemId: 'devicesOverview',
+                height: map.getHeight() - 50
             });
             panel.show().alignTo(Ext.getBody(), 'tr-tr');
         }
