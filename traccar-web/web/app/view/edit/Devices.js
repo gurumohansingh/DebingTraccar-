@@ -207,7 +207,9 @@ Ext.define('Traccar.view.edit.Devices', {
         checkOnly:true,
         showHeaderCheckbox: false,
         listeners:{
-            selectionchange: 'onSelectionChange'
+            selectionchange: 'onSelectionChange',
+            select :'onDeviceSelect',
+            deselect:'onDeviceDeselect'
         }
     }
 });

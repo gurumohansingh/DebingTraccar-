@@ -20,13 +20,16 @@ Ext.define('Traccar.view.deviceOverview.DevicesView', {
 
     items:[{
         xtype: 'dataview',
+        listeners:{
+            itemclick:'configView' 
+        },
         tpl: new Ext.XTemplate('<tpl for=".">',
             '<div style="margin:10px;background-color:lightgrey;border-radius:15px" height= "50 px" class="thumb-wrap">',
                 '<div style="background-color:seagreen;font-weight:bold;padding:6px;border-top-left-radius: 15px;border-top-right-radius: 15px;">{name}</div>',
                 '<div style="padding:5px;">',
                     '<table width="100%" style="border-spacing:5px;">',
                         '<tr>',
-                            '<td width="20%" style="text-align:center;margin:8px;background-color:white;border-radius:8px;">',
+                            '<td {type1} width="20%" style="text-align:center;margin:8px;background-color:white;border-radius:8px;">',
                                 '<img src="./images/1.gif" width="20" height="20">',
                                 '<br/> Text',
                             '</td>',
